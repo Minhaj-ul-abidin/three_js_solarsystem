@@ -2,13 +2,49 @@
     <meta charset="utf-8">
     <title>My first three.js app</title>
     <style>
-        body { margin: 0; }
-        canvas { display: block; }
+        body {
+            background: black;
+            user-select: none;
+        }
+
+        canvas {
+            cursor: pointer;
+            outline-color: whitesmoke;
+            outline-offset: 0px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            color: white;
+            font: 10pt monospace;
+            text-align: right;
+            padding: 10pt;
+            margin: 5pt;
+            border: 1px solid white;
+            cursor: default;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        p span {
+            color: #FF0;
+            font-weight: bold;
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body>
     <script src="js/libs/three.js"></script>
     <script type="module" src="js/libs/orbitcontrol.js"></script>
-    <script type = "module" src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
+<footer>
+    <p>Left Click / Touch to <span>Orbit</span> </p>
+    <p>Middle Click / Scroll / Pinch to <span>Zoom</span> </p>
+    <p>Right Click / 3 Finger Swipe to <span>Pan</span> </p>
+</footer>
+
 </html>
