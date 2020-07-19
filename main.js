@@ -1,12 +1,5 @@
 let ctx, camera, scene, renderer, planets, sun,glows=[], bgStars;
 
-
-
-
-
-
-
-
 function init() {
 	// Init scene
 	scene = new THREE.Scene();
@@ -37,8 +30,8 @@ function init() {
 	controls.dampingFactor = 1;
 
 	// helper grid
-	var gridXZ = new THREE.GridHelper(1000, 100);
-	scene.add(gridXZ);
+	// var gridXZ = new THREE.GridHelper(1000, 100);
+	// scene.add(gridXZ);
     let sun_size = 7
 	sun = new THREE.Mesh(
         new THREE.IcosahedronGeometry(sun_size, 2), 
@@ -128,14 +121,13 @@ function onWindowResize() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-window.addEventListener('resize', onWindowResize, false);
 
 function addPlanets(planetTextures, planetSizes) {
 	let planets = []
 
 	for (let p = 0, radii = 0; p < 8; p++) {
 		let size = planetSizes[p];
-		let planetGeom = new THREE.Mesh(
+		let planetShpere = new THREE.Mesh(
 				new THREE.IcosahedronGeometry(size, 2),
 				new THREE.MeshBasicMaterial({
 					map :  new THREE.TextureLoader().load(planetTextures[p])
@@ -144,7 +136,7 @@ function addPlanets(planetTextures, planetSizes) {
 			),
 			planet = new THREE.Group();
 
-		planet.add(planetGeom);
+		planet.add(planetShpere);
 
 		if (p == 5 || p == 7 ) {
 			let ring_texture = p == 5 ? "image/saturn_ring.jpg": "image/uranus_ring.jpg"
@@ -156,7 +148,7 @@ function addPlanets(planetTextures, planetSizes) {
 				v3.fromBufferAttribute(pos, i);
 				geometry.attributes.uv.setXY(i, v3.length() < size + size/3 ? 0 : 1, 1);
 			}
-			let ringGeo = new THREE.Mesh(
+			let ring = new THREE.Mesh(
 				geometry,
 				new THREE.MeshBasicMaterial({
 					map:  new THREE.TextureLoader().load(ring_texture),
@@ -167,9 +159,9 @@ function addPlanets(planetTextures, planetSizes) {
 				  })
 			)
             if( p == 5 ){
-            	ringGeo.rotation.x = 73 * Math.PI / 180
+            	ring.rotation.x = 73 * Math.PI / 180
             }
-			planet.add(ringGeo);
+			planet.add(ring);
 			
 
 
@@ -179,7 +171,7 @@ function addPlanets(planetTextures, planetSizes) {
 		planet.rotSpeed = 0.005 + Math.random() * 0.01;
 		planet.rotSpeed *= Math.random() < .10 ? -1 : 1;
 		planet.rot = Math.random();
-		planet.orbitSpeed = (0.02 - p * 0.0048) * 0.25;
+		planet.orbitSpeed = p != 4 ? (0.02 - p * 0.0048) * 0.25: (0.02 - 3.5 * 0.0048) * 0.25
 		planet.orbit = Math.random() * Math.PI * 2;
 		planet.position.set(planet.orbitRadius, 0, 0);
 		console.log(planet.orbitRadius)
@@ -240,6 +232,8 @@ function setupLights(){
     var light2 = new THREE.AmbientLight(0x090909);
     scene.add(light2);
 }
+
+window.addEventListener('resize', onWindowResize, false);
 
 init();
 animate();
