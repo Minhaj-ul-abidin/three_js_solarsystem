@@ -1,0 +1,27 @@
+{
+  "name": "three_js_solarsystem",
+  "version": "1.0.0",
+  "description": "threejs solar system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minhaj-ul-abidin/three_js_solarsystem.git"
+  },
+  "author": "Minhaj ul Abidin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Minhaj-ul-abidin/three_js_solarsystem/issues"
+  },
+  "homepage": "https://github.com/Minhaj-ul-abidin/three_js_solarsystem#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
